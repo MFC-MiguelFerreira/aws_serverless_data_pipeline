@@ -1,3 +1,3 @@
-output "bucket-name" {
-  value = module.storage.bucket_name
+output "bucket_ids" {
+  value = module.storage.bucket_ids
 }

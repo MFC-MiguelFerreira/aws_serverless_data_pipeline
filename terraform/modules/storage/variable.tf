@@ -1,4 +1,9 @@
 variable "account_id" {
-  type = string
-  description = "The AWS account ID to be used for naming the S3 bucket."
+  description = "The AWS account ID"
+  type        = string
+}
+
+variable "bucket_names" {
+  description = "List of S3 bucket names to create"
+  type        = list(string)
 }
