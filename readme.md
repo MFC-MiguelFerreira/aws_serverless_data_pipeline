@@ -63,3 +63,13 @@ After cloning the repository, follow these steps to deploy the infrastructure us
     `terraform destroy -var-file={path/to/.tfvars}`
 
 Remember to replace `{path/to/.tfvars}` with the actual path to your `.tfvars` file.
+
+### Docker Commands
+
+https://docs.aws.amazon.com/lambda/latest/dg/python-image.html#python-image-instructions
+
+```bash
+docker build -t python_lambda .
+docker run --platform linux/amd64 -p 9000:8080 python_lambda lambdas/extract.handler
+curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{"payload":"asdf"}'
+```

@@ -17,9 +17,13 @@ module "lambda_function_with_docker_build_from_ecr" {
   # Container Image
   ##################
   package_type  = "Image"
-  architectures = ["arm64"] # ["x86_64"]
+  architectures = ["x86_64"] # ["arm64"]
 
-  image_uri = module.docker_image.image_uri
+  image_uri            = module.docker_image.image_uri
+  image_config_command = ["lambdas/extract.handler"]
+  # image_config_entry_point = ["lambdas/extract.handler"]
+
+  # handler = "lambdas/extract.handler"
 }
 
 module "docker_image" {
@@ -29,7 +33,8 @@ module "docker_image" {
 
   use_image_tag = false
 
-  source_path = "context"
+  source_path = "../"
+  platform    = "linux/amd64"
 }
 
 module "ecr" {
@@ -40,5 +45,5 @@ module "ecr" {
 
   create_lifecycle_policy = false
 
-  # repository_lambda_read_access_arns = [module.lambda_function_with_docker_build_from_ecr.lambda_function_arn]
+  repository_lambda_read_access_arns = [module.lambda_function_with_docker_build_from_ecr.lambda_function_arn]
 }
