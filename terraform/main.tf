@@ -5,6 +5,24 @@ module "storage" {
   account_id   = local.account_id
 }
 
+module "step_function" {
+  source = "terraform-aws-modules/step-functions/aws"
+
+  name       = "test-step-functions"
+  definition = templatefile(
+    "../pipe/step_function.asl.json",
+    {
+      lambda_function_arn = module.lambda_function_with_docker_build_from_ecr.lambda_function_arn
+    }
+  )
+
+  service_integrations = {
+    lambda = {
+      lambda = [module.lambda_function_with_docker_build_from_ecr.lambda_function_arn]
+    }
+  }
+}
+
 module "lambda_function_with_docker_build_from_ecr" {
   source = "terraform-aws-modules/lambda/aws"
 
@@ -21,9 +39,6 @@ module "lambda_function_with_docker_build_from_ecr" {
 
   image_uri            = module.docker_image.image_uri
   image_config_command = ["lambdas/extract.handler"]
-  # image_config_entry_point = ["lambdas/extract.handler"]
-
-  # handler = "lambdas/extract.handler"
 }
 
 module "docker_image" {
