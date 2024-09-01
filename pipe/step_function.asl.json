@@ -1,14 +1,7 @@
 {
   "Comment": "A Hello World example of the Amazon States Language using Pass states",
-  "StartAt": "Hello",
+  "StartAt": "Lambda Invoke",
   "States": {
-    "Hello": {
-      "Type": "Pass",
-      "Result": {
-        "Hello": "from lambda"
-      },
-      "Next": "Lambda Invoke"
-    },
     "Lambda Invoke": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",

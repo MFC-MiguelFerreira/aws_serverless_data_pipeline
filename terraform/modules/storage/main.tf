@@ -9,4 +9,6 @@ resource "aws_s3_bucket" "datalake_buckets" {
   for_each = local.indexed_bucket_names
 
   bucket = each.value
+
+  force_destroy = true
 }
