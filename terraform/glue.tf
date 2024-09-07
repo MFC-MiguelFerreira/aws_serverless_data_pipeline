@@ -85,5 +85,10 @@ resource "aws_glue_catalog_table" "currency_exchange" {
       name = "create_date"
       type = "string"
     }
+    
+    columns {
+      name = "ingestion_datetime"
+      type = "string"
+    }
   }
 }
