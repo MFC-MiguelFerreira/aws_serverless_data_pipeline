@@ -1,0 +1,1 @@
+msck repair table ${raw_database_name}.${raw_table_name}

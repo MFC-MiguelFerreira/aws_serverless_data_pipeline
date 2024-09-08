@@ -1,8 +1,8 @@
 {
   "Comment": "A Hello World example of the Amazon States Language using Pass states",
-  "StartAt": "Lambda Invoke",
+  "StartAt": "Raw Extraction",
   "States": {
-    "Lambda Invoke": {
+    "Raw Extraction": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
@@ -23,6 +23,30 @@
           "BackoffRate": 2
         }
       ],
+      "Next": "Raw Partitions"
+    },
+    "Raw Partitions": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::athena:startQueryExecution.sync",
+      "Parameters": {
+        "QueryString": ${raw_partitions},
+        "WorkGroup": "primary",
+        "ResultConfiguration": {
+          "OutputLocation": "s3://athena-query-results-753251897225/"
+        }
+      },
+      "Next": "Curated Processing"
+    },
+    "Curated Processing": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::athena:startQueryExecution.sync",
+      "Parameters": {
+        "QueryString": ${curated_processing},
+        "WorkGroup": "primary",
+        "ResultConfiguration": {
+          "OutputLocation": "s3://athena-query-results-753251897225/"
+        }
+      },
       "End": true
     }
   }
