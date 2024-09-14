@@ -29,3 +29,7 @@ output "aws_glue_catalog_raw_database_name" {
 output "aws_glue_catalog_curated_database_name" {
   value = aws_glue_catalog_database.curated.name
 }
+
+output "eventbridge_rule" {
+  value = module.eventbridge.eventbridge_rules.crons.name
+}
