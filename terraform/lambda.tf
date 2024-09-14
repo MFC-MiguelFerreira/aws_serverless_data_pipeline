@@ -1,16 +1,20 @@
 module "lambda_function_with_docker_build_from_ecr" {
   source = "terraform-aws-modules/lambda/aws"
 
-  function_name = "test-lambda-with-docker-build-from-ecr"
-  description   = "My awesome lambda function with container image by modules/docker-build and ECR repository created by terraform-aws-ecr module"
+  function_name = "${var.infrastucture_prefix_name}_extract"
+  description   = "Lambda function to extract the data from the source."
 
-  create_package = false
+  environment_variables = {
+    raw_bucket_name = aws_s3_bucket.raw_datalake_bucket.bucket
+  }
 
   ##################
   # Container Image
   ##################
+  create_package = false
+
   package_type  = "Image"
-  architectures = ["x86_64"] # ["arm64"]
+  architectures = ["x86_64"]
 
   image_uri            = module.docker_image.image_uri
   image_config_command = ["lambdas/extract.handler"]

@@ -22,3 +22,9 @@ variable "infrastucture_tag" {
   description = "Cost tracker tag (e.g. terraform_serverless_data_pipeline)."
   nullable    = true
 }
+
+variable "infrastucture_prefix_name" {
+  type        = string
+  description = "Prefix name to easylly identify some resources created"
+  nullable    = true
+}

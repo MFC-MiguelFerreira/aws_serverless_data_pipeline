@@ -10,7 +10,7 @@ logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-raw_bucket_name = os.environ.get("raw_bucket_name", "00-raw-753251897225")
+raw_bucket_name = os.environ.get("raw_bucket_name")
 
 def handler(event, context):
     logger.info(f"Starting the extract lambda")
