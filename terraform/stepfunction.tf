@@ -20,7 +20,7 @@ locals {
 module "step_function" {
   source = "terraform-aws-modules/step-functions/aws"
 
-  name = "test-step-functions"
+  name = "${var.infrastucture_prefix_name}"
   definition = templatefile(
     "../pipe/step_function.asl.json",
     {

@@ -12,7 +12,7 @@ module "docker_image" {
 module "ecr" {
   source = "terraform-aws-modules/ecr/aws"
 
-  repository_name         = "lambda-ecr-image"
+  repository_name         = "${var.infrastucture_prefix_name}"
   repository_force_delete = true
 
   create_lifecycle_policy = false

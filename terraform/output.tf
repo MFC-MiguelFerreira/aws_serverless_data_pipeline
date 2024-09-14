@@ -17,3 +17,15 @@ output "ecr_docker_image_uri" {
 output "lambda_function_name" {
   value = module.lambda_function_with_docker_build_from_ecr.lambda_function_name
 }
+
+output "step_function_name" {
+  value = module.step_function.state_machine_name
+}
+
+output "aws_glue_catalog_raw_database_name" {
+  value = aws_glue_catalog_database.raw.name
+}
+
+output "aws_glue_catalog_curated_database_name" {
+  value = aws_glue_catalog_database.curated.name
+}
