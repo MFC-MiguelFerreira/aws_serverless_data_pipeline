@@ -1,6 +1,9 @@
-module "storage" {
-  source = "./modules/storage"
+resource "aws_s3_bucket" "raw_datalake_bucket" {
+  bucket        = "00-raw-${local.account_id}"
+  force_destroy = true
+}
 
-  bucket_names = ["raw", "curated"]
-  account_id   = local.account_id
+resource "aws_s3_bucket" "curated_datalake_bucket" {
+  bucket        = "01-curated-${local.account_id}"
+  force_destroy = true
 }

@@ -1,5 +1,9 @@
-output "bucket_ids" {
-  value = module.storage.bucket_ids
+output "raw_datalake_bucket_name" {
+  value = aws_s3_bucket.raw_datalake_bucket.bucket
+}
+
+output "curated_datalake_bucket_name" {
+  value = aws_s3_bucket.curated_datalake_bucket.bucket
 }
 
 output "ecr_repository_name" {

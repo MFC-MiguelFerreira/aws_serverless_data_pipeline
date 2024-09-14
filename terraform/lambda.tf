@@ -23,7 +23,7 @@ module "lambda_function_with_docker_build_from_ecr" {
     s3_read = {
       effect    = "Allow",
       actions   = ["s3:PutObject", "s3:GetObject"],
-      resources = ["arn:aws:s3:::00-raw-753251897225", "arn:aws:s3:::00-raw-753251897225/*"]
+      resources = ["${aws_s3_bucket.raw_datalake_bucket.arn}", "${aws_s3_bucket.raw_datalake_bucket.arn}/*"]
     }
   }
 }

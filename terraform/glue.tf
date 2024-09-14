@@ -23,7 +23,7 @@ resource "aws_glue_catalog_table" "currency_exchange_raw" {
   }
 
   storage_descriptor {
-    location      = "s3://00-raw-753251897225/currency_exchange/"
+    location      = "s3://${aws_s3_bucket.raw_datalake_bucket.bucket}/currency_exchange/"
     input_format  = "org.apache.hadoop.mapred.TextInputFormat"
     output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
 
@@ -112,7 +112,7 @@ resource "aws_glue_catalog_table" "currency_exchange" {
   }
 
   storage_descriptor {
-    location = "s3://01-curated-753251897225/currency_exchange/"
+    location = "s3://${aws_s3_bucket.curated_datalake_bucket.bucket}/currency_exchange/"
     columns {
       name    = "base_currency_code"
       type    = "string"
