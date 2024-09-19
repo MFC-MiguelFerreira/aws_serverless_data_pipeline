@@ -31,5 +31,5 @@ output "aws_glue_catalog_curated_database_name" {
 }
 
 output "eventbridge_rule" {
-  value = module.eventbridge.eventbridge_rules.crons.name
+  value = module.eventbridge.eventbridge_rules
 }
