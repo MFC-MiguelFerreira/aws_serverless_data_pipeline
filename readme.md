@@ -17,6 +17,10 @@ Before you begin, ensure that you have the following tools installed:
 
 After cloning the repository, follow these steps to deploy the infrastructure using Terraform:
 
+- Move to terraform folder:
+
+    `cd terraform`
+
 - Initialize Terraform:
 
     `terraform init`
