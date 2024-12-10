@@ -3,6 +3,7 @@ module "lambda_function_with_docker_build_from_ecr" {
 
   function_name = "${var.infrastucture_prefix_name}_extract"
   description   = "Lambda function to extract the data from the source."
+  timeout = 30
 
   environment_variables = {
     raw_bucket_name = aws_s3_bucket.raw_datalake_bucket.bucket
